@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Celmanía Juigalpa | Tienda de Telefonía y Servicio Técnico</title>
+
+    <!-- SEO Básico -->
+    <meta name="description" content="Celmanía Juigalpa. Tienda de telefonía celular, venta de accesorios originales, repuestos y servicio técnico especializado de reparaciones en Juigalpa.">
+    <meta name="keywords" content="Celmania Juigalpa, Tienda de celulares Juigalpa, Reparacion de celulares Nicaragua, Accesorios para celulares, Servicio tecnico Chontales">
+
+    <!-- Fuentes e Iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',     /* Azul Eléctrico Tech */
+                        secondary: '#06b6d4',   /* Cian Brillante */
+                        ink: '#0f172a',         /* Fondo Oscuro Premium */
+                        muted: '#64748b',
+                        soft: '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif']
+                    },
+                    boxShadow: {
+                        glow: '0 20px 50px rgba(37, 99, 235, 0.15)',
+                        cyber: '0 0 20px rgba(6, 182, 212, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        body { margin: 0; background: #ffffff; color: #0f172a; font-family: 'Inter', sans-serif; touch-action: pan-y; }
+        main, section, nav, footer { max-width: 100%; overflow-x: clip; }
+        img, video, canvas, svg { max-width: 100%; height: auto; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        .nav-link {
+            color: #475569;
+            font-weight: 600;
+            transition: color 180ms ease;
+        }
+        .nav-link:hover { color: #2563eb; }
+
+        .btn-primary {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            background: #2563eb;
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+            transition: all 180ms ease;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            min-height: 550px;
+            background-image: 
+                linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%), 
+                url('https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            transition: all 200ms ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-4px);
+            border-color: #2563eb;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            right: clamp(1rem, 3vw, 2rem);
+            bottom: clamp(1rem, 3vw, 2rem);
+            width: 58px;
+            height: 58px;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: #25d366;
+            color: #fff;
+            font-size: 2rem;
+            box-shadow: 0 14px 32px rgba(37, 211, 102, 0.38);
+            animation: pulse-green 2.2s infinite;
+            transition: transform 180ms ease;
+        }
+        .floating-whatsapp:hover { transform: scale(1.08); animation: none; }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+            70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        #success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+        }
+        #success-modal.active { display: flex; }
+
+        @media (max-width: 640px) {
+            [data-aos^="fade"][data-aos^="fade"] {
+                transform: none !important;
+            }
+
+            .floating-whatsapp {
+                right: 1rem;
+                bottom: 1rem;
+                width: 54px;
+                height: 54px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-slate-100" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <button type="button" class="flex items-center gap-3 text-left" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                    <!-- LOGO INTEGRADO -->
+                    <img src="imagenes/logo.jpg" alt="Logo Celmanía Juigalpa" class="w-12 h-12 object-contain rounded-xl shadow-sm border border-slate-100">
+                    <div class="leading-none">
+                        <span class="font-heading font-black text-2xl text-ink tracking-tight block">CELMANÍA</span>
+                        <span class="text-primary font-bold text-xs tracking-widest uppercase">Juigalpa</span>
+                    </div>
+                </button>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="nav-link">Inicio</a>
+                    <a href="#servicios" class="nav-link">Servicios</a>
+                    <a href="#tienda" class="nav-link">Modelos y Accesorios</a>
+                    <a href="#contacto" class="nav-link">Contacto</a>
+                    <a href="https://wa.me/50584442654" target="_blank" rel="noopener" class="btn-primary px-6 text-sm">
+                        <i class="fa-solid fa-screwdriver-wrench"></i> Consultar Técnico
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" type="button" class="md:hidden w-11 h-11 rounded-xl border border-slate-200 text-primary flex items-center justify-center" aria-label="Menú">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 py-4">
+                <div class="grid gap-3">
+                    <a href="#inicio" class="nav-link py-2">Inicio</a>
+                    <a href="#servicios" class="nav-link py-2">Servicios</a>
+                    <a href="#tienda" class="nav-link py-2">Modelos y Accesorios</a>
+                    <a href="#contacto" class="nav-link py-2">Contacto</a>
+                    <a href="https://wa.me/50584442654" target="_blank" rel="noopener" class="btn-primary px-6 w-full">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Técnico
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WHATSAPP FLOTANTE -->
+    <a href="https://wa.me/50584442654" target="_blank" rel="noopener" class="floating-whatsapp" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <main class="pt-20">
+
+        <!-- HERO SECTION -->
+        <section id="inicio" class="hero-section relative flex items-center justify-center py-24 text-center text-white">
+            <div class="max-w-4xl mx-auto px-4 w-full">
+                <p class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-6" data-aos="fade-down">
+                    <i class="fa-solid fa-store"></i> Compras en Tienda & Retiro Local
+                </p>
+
+                <h1 class="text-4xl sm:text-6xl font-black leading-tight mb-6 tracking-tight" data-aos="fade-up">
+                    Tu Teléfono en Manos de Profesionales
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+                    Venta de smartphones de última generación, los mejores accesorios del mercado y servicio de reparación técnica garantizada.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="180">
+                    <a href="https://wa.me/50584442654" target="_blank" rel="noopener" class="btn-primary px-8 py-4 text-base">
+                        <i class="fa-brands fa-whatsapp"></i> Cotizar Accesorio o Reparación
+                    </a>
+                    <a href="#servicios" class="inline-flex items-center justify-center border-2 border-slate-400 text-white rounded-xl px-8 py-4 font-bold transition hover:bg-white hover:text-ink hover:border-white">
+                        Ver Servicios
+                    </a>
+                </div>
+
+                <!-- INFO DE COMPRA RÁPIDA -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mt-16 text-left" data-aos="fade-up" data-aos-delay="250">
+                    <div class="bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-bag-shopping text-secondary text-2xl mb-2"></i>
+                        <h4 class="font-bold text-white mb-1">In-store Shopping</h4>
+                        <p class="text-xs text-slate-400">Visítanos y elige tu equipo favorito directo en vitrina.</p>
+                    </div>
+                    <div class="bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-box-open text-secondary text-2xl mb-2"></i>
+                        <h4 class="font-bold text-white mb-1">In-store Pickup</h4>
+                        <p class="text-xs text-slate-400">Aparta tu repuesto o pantalla y retíralo listo en tienda.</p>
+                    </div>
+                    <div class="bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-shield-halved text-secondary text-2xl mb-2"></i>
+                        <h4 class="font-bold text-white mb-1">Reparación Segura</h4>
+                        <p class="text-xs text-slate-400">Técnicos calificados que cuidan la privacidad de tu dispositivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN SERVICIOS -->
+        <section id="servicios" class="py-20 bg-soft">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mb-12" data-aos="fade-up">
+                    <p class="text-primary font-black uppercase tracking-wide mb-2">Especialidades Técnicas</p>
+                    <h2 class="text-3xl md:text-5xl font-black text-ink mb-4">¿Qué Solución Buscas?</h2>
+                    <p class="text-muted text-lg">Solucionamos cualquier problema de software o hardware para dejar tu celular como nuevo.</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Servicio 1 -->
+                    <div class="tech-card p-6" data-aos="fade-up">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-ink mb-2">Cambio de Pantallas</h3>
+                        <p class="text-muted text-sm">Instalamos displays y cristales de alta calidad con el ajuste y brillo correcto.</p>
+                    </div>
+                    <!-- Servicio 2 -->
+                    <div class="tech-card p-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-battery-three-quarters"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-ink mb-2">Baterías y Pines de Carga</h3>
+                        <p class="text-muted text-sm">¿No carga o se apaga rápido? Reemplazamos la batería por repuestos certificados.</p>
+                    </div>
+                    <!-- Servicio 3 -->
+                    <div class="tech-card p-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-ink mb-2">Sistemas y Software</h3>
+                        <p class="text-muted text-sm">Desbloqueos, actualizaciones de sistema, fallos de inicio y optimización general.</p>
+                    </div>
+                    <!-- Servicio 4 -->
+                    <div class="tech-card p-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-ink mb-2">Microelectrónica</h3>
+                        <p class="text-muted text-sm">Reparación avanzada de placas base, circuitos integrados dañados por humedad o golpes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACCESORIOS Y SMARTPHONES -->
+        <section id="tienda" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        <p class="text-secondary font-black uppercase tracking-wide mb-2">Vitrina Tecnológica</p>
+                        <h2 class="text-3xl md:text-5xl font-black text-ink mb-6">Equipa tu Dispositivo</h2>
+                        <p class="text-muted text-lg mb-6 leading-relaxed">
+                            No solo reparamos, también contamos con una amplia gama de teléfonos móviles y los complementos esenciales para proteger y potenciar tu tecnología todos los días.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex gap-4 items-start">
+                                <div class="mt-1 text-primary"><i class="fa-solid fa-circle-check text-xl"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-ink">Estuches y Vidrios Templados</h4>
+                                    <p class="text-sm text-muted">Protección de alto impacto militar, vidrios cerámicos y privacidad.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="mt-1 text-primary"><i class="fa-solid fa-circle-check text-xl"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-ink">Cargadores Rápidos y Cables</h4>
+                                    <p class="text-sm text-muted">Cubos de carga rápida e inteligente para iPhone, Samsung, Xiaomi y más.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="mt-1 text-primary"><i class="fa-solid fa-circle-check text-xl"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-ink">Audio y Audífonos inalámbricos</h4>
+                                    <p class="text-sm text-muted">Bluetooth, parlantes portátiles y manos libres con excelente acústica.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/50584442654" target="_blank" rel="noopener" class="btn-primary px-6 py-3.5 text-base">
+                            <i class="fa-solid fa-layer-group"></i> Consultar Disponibilidad de Modelos
+                        </a>
+                    </div>
+
+                    <!-- Grilla visual Tech -->
+                    <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                        <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=600&q=80" alt="Accesorios telefónicos modernos" class="rounded-2xl h-64 w-full object-cover shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&w=600&q=80" alt="Pantalla de teléfono celular" class="rounded-2xl h-64 w-full object-cover shadow-sm mt-8">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CONTACTO -->
+        <section id="contacto" class="py-20 bg-ink text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+                    
+                    <!-- Información Izquierda -->
+                    <div data-aos="fade-right">
+                        <p class="text-secondary font-black uppercase tracking-wide mb-2">Atención Inmediata</p>
+                        <h2 class="text-3xl md:text-5xl font-black mb-6">¿Hablamos de tu Equipo?</h2>
+                        <p class="text-slate-400 text-lg mb-8">
+                            Escríbenos para darte un presupuesto aproximado o visítanos directamente en nuestro local en Juigalpa para realizar un diagnóstico completo en minutos.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-secondary text-xl flex-shrink-0 border border-slate-800">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-lg">Ubicación</h4>
+                                    <p class="text-slate-300">Juigalpa, Chontales, Nicaragua.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-secondary text-xl flex-shrink-0 border border-slate-800">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-lg">Número de Contacto</h4>
+                                    <p class="text-slate-300">+505 8444 2654</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-secondary text-xl flex-shrink-0 border border-slate-800">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-lg">Correo Electrónico</h4>
+                                    <p class="text-slate-300 text-sm">alvarinespinoza1987@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Pedido / Cotización Tech -->
+                    <div class="bg-white text-ink p-8 rounded-2xl shadow-glow border border-slate-100" data-aos="fade-left">
+                        <h3 class="text-2xl font-black mb-1">Cotizar Servicio Técnico</h3>
+                        <p class="text-muted text-sm mb-6">Describe los fallos de tu móvil para brindarte un estimado técnico.</p>
+                        
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1" for="name">Nombre Completo</label>
+                                <input id="name" type="text" placeholder="Ej. Carlos Mendoza" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1" for="device">Marca y Modelo del Celular</label>
+                                <input id="device" type="text" placeholder="Ej. Samsung Galaxy S23 Ultra / iPhone 14 Pro" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1" for="message">Detalle del Daño o Accesorio que Buscas</label>
+                                <textarea id="message" rows="3" placeholder="Ej. La pantalla se quedó en negro tras una caída / Busco estuche original..." required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary w-full py-4 text-base">
+                                <i class="fa-brands fa-whatsapp"></i> Enviar a Celmanía WhatsApp
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-white border-t border-slate-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+            <div class="grid md:grid-cols-3 gap-8 mb-8 items-center">
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <!-- LOGO EN EL FOOTER -->
+                    <img src="imagenes/logo.jpg" alt="Logo Celmanía" class="w-14 h-14 object-contain rounded-xl opacity-90">
+                    <div>
+                        <h4 class="font-heading font-black text-2xl mb-1 tracking-tight">CELMANÍA</h4>
+                        <p class="text-sm text-slate-400">Tienda de telefonía, venta de accesorios y reparaciones.</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm text-slate-400"><i class="fa-solid fa-location-dot text-primary mr-2"></i>Juigalpa, Nicaragua</p>
+                </div>
+                <div class="flex justify-center md:justify-end gap-4">
+                    <a href="https://wa.me/50584442654" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition text-lg">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:alvarinespinoza1987@gmail.com" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition text-lg">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-slate-900 pt-8 text-center text-sm text-slate-600">
+                <p>&copy; 2026 Celmanía Juigalpa. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE ÉXITO -->
+    <div id="success-modal">
+        <div class="bg-white border border-primary p-8 rounded-2xl max-w-sm w-full text-center relative transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-blue-50 text-primary rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-black text-ink mb-1">¡Datos Listos!</h3>
+            <p class="text-muted text-sm mb-6">Tu presupuesto técnico y orden de servicio se han procesado para WhatsApp.</p>
+            <button id="close-modal-btn" type="button" class="btn-primary w-full py-3">Entendido</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 700, once: true, offset: 50 });
+
+        const contactForm = document.getElementById('contact-form');
+        const successModal = document.getElementById('success-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Toggle menú móvil
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Formulario inteligente integrado a la API de WhatsApp empresarial
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const device = document.getElementById('device').value;
+            const message = document.getElementById('message').value;
+            
+            // Construye texto ordenado
+            const baseText = `Hola Celmanía Juigalpa, mi nombre es ${name}. Necesito cotizar un servicio técnico para el dispositivo [${device}]. Detalle de la consulta: ${message}`;
+            const whatsappUrl = `https://wa.me/50584442654?text=${encodeURIComponent(baseText)}`;
+            
+            window.open(whatsappUrl, '_blank');
+
+            successModal.classList.add('active');
+            contactForm.reset();
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            successModal.classList.remove('active');
+        });
+
+        // Scroll suave con offset de compensación de menú fijo
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    mobileMenu.classList.add('hidden');
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
